@@ -17,4 +17,6 @@ int _putchar(char c);
 
 int _printf(const char *format, ...);
 
+int handle_printf(const char *format, ...);
+
 #endif /* MAIN_H */
