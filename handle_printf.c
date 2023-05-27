@@ -1,45 +1,74 @@
 #include "main.h"
-#include <stdarg.h>
 #include <stdio.h>
 
-
-
+int print_number(int num); /* function declaration */
 /**
- * handle_printf - print function
- * @format: format used
- * @...:indicates any number of arguments to be passed
- * Return: printed characters
- *
+ * _printf - prints a function
+ * @formar: format to be printed
+ * ...: arguments to be used
+ * Description: Handle the following conversion specifiers
+ * Return: printed character
  */
 
-
-int handle_printf(const char *format, ...)
+int _printf(const char *format, ...)
 {
-	int counter = 0; /* tells the computer how many char we print */
-	int n = 0; /* counter variable for the fmt str */
-	va_list my_args; /* declares my_args as a var_list */
+	int counter = 0, n = 0, num = 0;
+	va_list my_args;
 
-	va_start(my_args, format); /* initializes the list with fmt arg */
+	va_start(my_args, format);
 
 	while (format[n])
 	{
-		if (format[n] == 'd')
+		if (format[n] != '%')
 		{
-		int d = va_arg(my_args, int);
-
-			_putchar(d);
+			_putchar(format[n++]);
 			counter++;
 		}
-		else if (format[n] == 'i')
+		else if (format[++n] == 'd' || format[n] == 'i')
 		{
-			int i = va_arg(my_args, int);
-
-			_putchar(i);
+			num = va_arg(my_args, int);
+			if (num < 0)
+			{
+				_putchar('-');
+				counter++;
+				num *= -1;
+			}
+			counter += print_number(num);
+			n++;
+		}
+		else
+		{
+			_putchar(format[n++]);
 			counter++;
 		}
-		n++; /* moves to the next char in the fmt str */
 	}
 
-	va_end(my_args); /* cleans the arg list */
-	return (counter); /* returns number of printed characters */
+	va_end(my_args);
+
+	return (counter);
 }
+
+/**
+ * print_number - prints numbers
+ * @num:  integer digit to print
+ * Return: digits
+ */
+int print_number(int num)
+{
+	int digits = 0;
+
+	if (num == 0)
+	{
+		_putchar('0');
+		digits = 1;
+	}
+	else
+	{
+		if (num / 10)
+			digits = print_number(num / 10);
+		_putchar('0' + (num % 10));
+		digits++;
+	}
+	return (digits);
+}
+

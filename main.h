@@ -19,4 +19,6 @@ int _printf(const char *format, ...);
 
 int handle_printf(const char *format, ...);
 
+int print_number(int num);
+
 #endif /* MAIN_H */
