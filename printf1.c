@@ -1,17 +1,20 @@
 #include "main.h"
+#include <stdarg.h>
+
 /**
  * _printf - print function
  * @format: format used
  * @...:indicates any number of arguments to be passed
- * Return: printed characters
+ * Return: printed character
  */
+
 int _printf(const char *format, ...)
 {
-	int counter = 0; /* tells the computer how many char we print */
-	int n = 0; /* counter variable for the fmt str */
-	va_list my_args; /* declares my_args as a var_list */
+	int counter = 0;
+	int n = 0;
 
-	va_start(my_args, format); /* initializes the list with fmt arg */
+	va_list my_args;
+	va_start(my_args, format);
 
 	while (format[n])
 	{
@@ -22,22 +25,63 @@ int _printf(const char *format, ...)
 		}
 		else
 		{
-			n++; /* after this '%' move to the next char */
+			n++;
 			if (format[n] == 'c')
-				counter += print_char(my_args);
+			{
+				char c = va_arg(my_args, int);
+				_putchar(c);
+				counter++;
+			}
 			else if (format[n] == 's')
-				counter += print_string(my_args);
+			{
+				char *s = va_arg(my_args, char *);
+				while (*s)
+				{
+					_putchar(*s);
+					s++;
+					counter++;
+				}
+			}
 			else if (format[n] == '%')
 			{
 				_putchar('%');
 				counter++;
 			}
 			else if (format[n] == 'd' || format[n] == 'i')
-				counter += print_int(my_args);
+			{
+				int num = va_arg(my_args, int);
+				counter += print_number(num);
+			}
+			else if (format[n] == 'u')
+			{
+				unsigned int num = va_arg(my_args, unsigned int);
+				counter += print_unsigned(num);
+			}
+			else if (format[n] == 'o')
+			{
+				unsigned int num = va_arg(my_args, unsigned int);
+				counter += print_octal(num);
+			}
+			else if (format[n] == 'x' || format[n] == 'X')
+			{
+				unsigned int num = va_arg(my_args, unsigned int);
+				counter += print_hexadecimal(num, format[n]);
+			}
+			else if (format[n] == 'p')
+			{
+				void *ptr = va_arg(my_args, void *);
+				counter += print_address(ptr);
+			}
+			else if (format[n] == 'n')
+			{
+				int *ptr = va_arg(my_args, int *);
+				*ptr = counter;
+			}
 		}
-		n++; /* moves to the next char in the fmt str */
+		n++;
 	}
 
-	va_end(my_args); /* cleans the arg list */
-	return (counter); /* returns number of printed characters */
+	va_end(my_args);
+	return counter;
 }
+
