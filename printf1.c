@@ -24,28 +24,16 @@ int _printf(const char *format, ...)
 		{
 			n++; /* after this '%' move to the next char */
 			if (format[n] == 'c')
-			{
-				char c = va_arg(my_args, int);
-
-				_putchar(c);
-				counter++;
-			}
+				counter += print_char(my_args);
 			else if (format[n] == 's')
-			{
-				char *s = va_arg(my_args, char *);
-
-				while (*s)
-				{
-					_putchar(*s);
-					s++;
-					counter++;
-				}
-			}
+				counter += print_string(my_args);
 			else if (format[n] == '%')
 			{
 				_putchar('%');
 				counter++;
 			}
+			else if (format[n] == 'd' || format[n] == 'i')
+				counter += print_int(my_args);
 		}
 		n++; /* moves to the next char in the fmt str */
 	}
