@@ -20,22 +20,24 @@ int _printf(const char *format, ...);
 
 int print_char(va_list my_args);
 
-int print_string(va_list my_args);
+int print_string(char *str);
 
 int print_int(va_list my_args);
 
 int print_number(int n);
 
-int print_unsigned(unsigned int n);
+unsigned int print_unsigned(va_list my_args)
 
 int print_octal(unsigned int n);
 
-int print_hexadecimal(unsigned int n, int uppercase);
+int print_hexadecimal(unsigned int n, char format);
 
 int print_address(void *p);
 
 int main(void);
 
-void main_print(void);
+int print_decimal(int num);
+
+int handle_format_specifier(char specifier, va_list my_args, int *counter);
 
 #endif /* MAIN_H */

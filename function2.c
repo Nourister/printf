@@ -2,38 +2,41 @@
 
 /**
  * print_char - print a character
- * @arg: argument containing the character to print
+ * @my_args: argument containing the character to print
+ * Description: prints string and returns number of
+ * printed characters
  * Return: number of characters printed
  */
 int print_char(va_list my_args)
 {
-	char c = va_arg(my_args, int); /* gets the next arg in the list as char */
+	char c = va_arg(my_args, int);
+
 	_putchar(c);
 	return (1);
 }
 
 /**
- * print_string - print a string
- * @arg: argument containing the string to print
- * Return: number of characters printed
+ * print_string - Prints a string.
+ * @str: The string to print.
+ *
+ * Return: The number of characters printed.
  */
-int print_string(va_list my_args)
+int print_string(char *str)
 {
-	char *s = va_arg(my_args, char *); /* gets the next arg in the list as string */
-	int counter = 0;
+    int i = 0;
 
-	if (s == NULL)
-		s = "(null)";
+    if (str == NULL)
+        str = "(null)";
 
-	while (*s)
-	{
-		_putchar(*s);
-		s++;
-		counter++;
-	}
+    while (str[i] != '\0')
+    {
+        _putchar(str[i]);
+        i++;
+    }
 
-	return (counter);
+    return i;
 }
+
 
 /**
  * print_number - print an integer
@@ -64,8 +67,38 @@ int print_number(int n)
 }
 
 /**
+ * print_decimal - print a decimal number
+ * @num: number to print
+ * Return: number of characters printed
+ */
+int print_decimal(int num)
+{
+	unsigned int n;
+	int counter = 0;
+
+	if (num < 0)
+	{
+		_putchar('-');
+		n = -num;
+		counter++;
+	}
+	else
+		n = num;
+
+	if (n / 10)
+		counter += print_decimal(n / 10);
+
+	_putchar((n % 10) + '0');
+	counter++;
+
+	return (counter);
+}
+
+/**
  * print_int - print an integer
- * @arg: argument containing the integer to print
+ * @my_args: argument containing the integer to print
+ * Description: prints an integer and returns number
+ * of printed characters
  * Return: number of characters printed
  */
 int print_int(va_list my_args)

@@ -1,5 +1,8 @@
 #include "main.h"
 #include <stdarg.h>
+#include <stdio.h>
+
+int handle_format_specifier(char specifier, va_list my_args, int *counter);
 
 /**
  * _printf - print function
@@ -14,6 +17,7 @@ int _printf(const char *format, ...)
 	int n = 0;
 
 	va_list my_args;
+
 	va_start(my_args, format);
 
 	while (format[n])
@@ -26,62 +30,56 @@ int _printf(const char *format, ...)
 		else
 		{
 			n++;
-			if (format[n] == 'c')
-			{
-				char c = va_arg(my_args, int);
-				_putchar(c);
-				counter++;
-			}
-			else if (format[n] == 's')
-			{
-				char *s = va_arg(my_args, char *);
-				while (*s)
-				{
-					_putchar(*s);
-					s++;
-					counter++;
-				}
-			}
-			else if (format[n] == '%')
-			{
-				_putchar('%');
-				counter++;
-			}
-			else if (format[n] == 'd' || format[n] == 'i')
-			{
-				int num = va_arg(my_args, int);
-				counter += print_number(num);
-			}
-			else if (format[n] == 'u')
-			{
-				unsigned int num = va_arg(my_args, unsigned int);
-				counter += print_unsigned(num);
-			}
-			else if (format[n] == 'o')
-			{
-				unsigned int num = va_arg(my_args, unsigned int);
-				counter += print_octal(num);
-			}
-			else if (format[n] == 'X' || format[n] == 'x')
-			{
-				unsigned int num = va_arg(my_args, unsigned int);
-				counter += print_hexadecimal(num, format[n]);
-			}
-			else if (format[n] == 'p')
-			{
-				void *ptr = va_arg(my_args, void *);
-				counter += print_address(ptr);
-			}
-			else if (format[n] == 'n')
-			{
-				int *ptr = va_arg(my_args, int *);
-				*ptr = counter;
-			}
+			counter += handle_format_specifier(format[n], my_args, &counter);
 		}
 		n++;
 	}
 
 	va_end(my_args);
-	return counter;
+	return (counter);
 }
 
+/**
+ * handle_format_specifier - Handles the conversion specifier.
+ * @specifier: The conversion specifier character.
+ * @my_args: The va_list of arguments
+ * @counter: The current counter value.
+ * Return: The updated counter value.
+ */
+int handle_format_specifier(char specifier, va_list my_args, int *counter)
+{
+	switch (specifier)
+	{
+		case 'c':
+			return (_putchar(va_arg(my_args, int)));
+		case 's':
+			return (print_string(va_arg(my_args, char*)));
+		case 'd':
+		case 'i':
+			return (print_decimal(va_arg(my_args, int)));
+		case 'u':
+			return (unsigned int num = va_arg(my_args, unsigned int));
+		case 'o':
+			return (print_octal(va_arg(my_args, unsigned int)));
+		case 'x':
+		case 'X':
+			return (print_hexadecimal(va_arg(my_args, unsigned int), specifier));
+		case 'p':
+			return (print_address(va_arg(my_args, void *)));
+		case '%':
+			_putchar('%');
+			return (1);
+		case 'n':
+			{
+				int *ptr = va_arg(my_args, int *);
+				*ptr = *counter;
+			}
+			return (0);
+		case '\0':
+			return (-1);
+		default:
+			_putchar('%');
+			_putchar(specifier);
+			return (2);
+	}
+}

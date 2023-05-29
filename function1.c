@@ -2,22 +2,22 @@
 
 /**
  * print_unsigned - Prints an unsigned integer
- * @n: The unsigned integer to print
+ * @my_args: The va_list of arguments.
  *
  * Return: The number of characters printed
  */
-int print_unsigned(unsigned int n)
+unsigned int print_unsigned(va_list my_args)
 {
-	unsigned int num = n;
+	unsigned int num = va_arg(my_args, unsigned int);
 	int counter = 0;
 
 	if (num / 10)
-		counter += print_unsigned(num / 10);
+		counter += print_unsigned(my_args);
 
 	_putchar((num % 10) + '0');
 	counter++;
 
-	return counter;
+	return (counter);
 }
 
 /**
@@ -38,48 +38,51 @@ int print_octal(unsigned int n)
 		counter++;
 	} while (num != 0);
 
-	while (counter > 0) {
+	while (counter > 0)
+	{
 		_putchar(octal_digits[counter - 1]);
 		counter--;
 	}
-
-	return counter;
+	return (counter);
 }
 
 /**
- * print_hexadecimal - Prints an unsigned integer in hexadecimal format
- * @n: The unsigned integer to print
- * @uppercase: Indicates whether to print in uppercase (1) or lowercase (0)
- *
- * Return: The number of characters printed
+ * print_hexadecimal - prints unsigned integer in hexadecimal form
+ * @n: unsigned integer to print
+ * @format: format specifier ('x' or 'X')
+ * Return: number of characters printed
  */
-int print_hexadecimal(unsigned int n, int uppercase)
+int print_hexadecimal(unsigned int n, char format)
 {
-	unsigned int num = n;
-	int counter = 0;
-	char hex_digits[100]; /* Assuming a maximum of 100 hexadecimal digits */
-	int i;
+	unsigned int rem;
+	char hex[100];
 
-	do {
-		int remainder = num % 16;
-		if (remainder < 10)
-			hex_digits[counter] = remainder + '0';
-		else
-			hex_digits[counter] = (uppercase ? 'a' : 'A') + (remainder - 10);
-		if (remainder < 10)
-			hex_digits[counter] = remainder + '0';
-		else
-			hex_digits[counter] = (uppercase ? 'a' : 'A') + (remainder - 10);
-		num /= 16;
+	int i = 0, counter = 0;
+
+	if (n == 0)
+	{
+		_putchar('0');
 		counter++;
-	} while (num != 0);
+	}
+	else
+	{
+		while (n != 0)
+		{
+			rem = n % 16;
+			hex[i] = (rem < 10) ? (rem + '0') : (rem + (
+			format == 'x' ? 'a' : 'A') - 10);
+			n /= 16;
+			i++;
+		}
 
-	for (i = counter - 1; i >= 0; i--) {
-		_putchar(hex_digits[i]);
-		counter++; /*Increment the counter for each character printed*/
+		for (i = i - 1; i >= 0; i--)
+		{
+			_putchar(hex[i]);
+			counter++;
+		}
 	}
 
-	return counter;
+	return (counter);
 }
 
 /**
@@ -109,6 +112,7 @@ int print_address(void *p)
 		for (i = 0; address != 0; i++)
 		{
 			int remainder = address % 16;
+
 			if (remainder < 10)
 				hex_digits[i] = remainder + '0';
 			else
@@ -122,6 +126,5 @@ int print_address(void *p)
 			counter++;
 		}
 	}
-
-	return counter;
+	return (counter);
 }
