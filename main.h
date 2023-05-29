@@ -26,7 +26,11 @@ int print_int(va_list my_args);
 
 int print_number(int n);
 
+int handle_format_specifier(char specifier, va_list my_args, int *counter);
+
 unsigned int print_unsigned(va_list my_args);
+
+/*unsigned int print_unsigned(unsigned int num);*/
 
 int print_octal(unsigned int n);
 
