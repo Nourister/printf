@@ -65,13 +65,19 @@ int print_hexadecimal(unsigned int n, int uppercase)
 		if (remainder < 10)
 			hex_digits[counter] = remainder + '0';
 		else
-			hex_digits[counter] = (uppercase ? 'A' : 'a') + (remainder - 10);
+			hex_digits[counter] = (uppercase ? 'a' : 'A') + (remainder - 10);
+		if (remainder < 10)
+			hex_digits[counter] = remainder + '0';
+		else
+			hex_digits[counter] = (uppercase ? 'a' : 'A') + (remainder - 10);
 		num /= 16;
 		counter++;
 	} while (num != 0);
 
-	for (i = counter - 1; i >= 0; i--)
+	for (i = counter - 1; i >= 0; i--) {
 		_putchar(hex_digits[i]);
+		counter++; /*Increment the counter for each character printed*/
+	}
 
 	return counter;
 }

@@ -34,4 +34,8 @@ int print_hexadecimal(unsigned int n, int uppercase);
 
 int print_address(void *p);
 
+int main(void);
+
+void main_print(void);
+
 #endif /* MAIN_H */

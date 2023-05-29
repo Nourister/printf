@@ -62,7 +62,7 @@ int _printf(const char *format, ...)
 				unsigned int num = va_arg(my_args, unsigned int);
 				counter += print_octal(num);
 			}
-			else if (format[n] == 'x' || format[n] == 'X')
+			else if (format[n] == 'X' || format[n] == 'x')
 			{
 				unsigned int num = va_arg(my_args, unsigned int);
 				counter += print_hexadecimal(num, format[n]);
