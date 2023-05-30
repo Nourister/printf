@@ -58,7 +58,7 @@ int handle_format_specifier(char specifier, va_list my_args, int *counter)
 		case 'i':
 			return (print_decimal(va_arg(my_args, int)));
 		case 'u':
-			return (print_unsigned(my_args));
+			return (print_unsigned_va_list(my_args));
 		case 'o':
 			return (print_octal(va_arg(my_args, unsigned int)));
 		case 'x':

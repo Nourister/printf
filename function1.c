@@ -2,22 +2,43 @@
 
 /**
  * print_unsigned - Prints an unsigned integer
- * @my_args: The va_list of arguments.
+ * @my_args: The va_list of arguments
  *
  * Return: The number of characters printed
  */
 unsigned int print_unsigned(va_list my_args)
 {
 	unsigned int num = va_arg(my_args, unsigned int);
-	int counter = 0;
+	unsigned int counter = 0;
 
-	if (num / 10)
-		counter += print_unsigned(my_args);
+	if (num == 0)
+	{
+		_putchar('0');
+		return (1);
+	}
 
-	_putchar((num % 10) + '0');
-	counter++;
+	while (num > 0)
+	{
+		unsigned int digit = num % 10;
+
+		_putchar(digit + '0');
+		num = num / 10;
+		counter++;
+	}
 
 	return (counter);
+}
+
+/**
+ * print_unsigned_va_list - Wrapper function to print
+ * an unsigned integer using va_list
+ * @my_args: The va_list of arguments
+ *
+ * Return: The number of characters printed
+ */
+unsigned int print_unsigned_va_list(va_list my_args)
+{
+	return (print_unsigned(my_args));
 }
 
 /**
