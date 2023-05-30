@@ -56,14 +56,34 @@ int handle_format_specifier(char specifier, va_list my_args, int *counter)
 			return (print_string(va_arg(my_args, char*)));
 		case 'd':
 		case 'i':
-			return (print_decimal(va_arg(my_args, int)));
+			if (length_modifier == 'l')
+				return (print_long_decimal(va_arg(my_args, long)));
+			else if (length_modifier == 'h')
+				return (print_short_decimal(va_arg(my_args, int)));
+			else
+				return (print_decimal(va_arg(my_args, int)));
 		case 'u':
-			return (print_unsigned_va_list(my_args));
+			if (length_modifier == 'l')
+				return (print_long_unsigned(va_arg(my_args, unsigned long)));
+			else if (length_modifier == 'h')
+				return (print_short_unsigned(va_arg(my_args, unsigned int)));
+			else
+				return (print_unsigned(va_arg(my_args, unsigned int)));
 		case 'o':
-			return (print_octal(va_arg(my_args, unsigned int)));
+			if (length_modifier == 'l')
+				return (print_long_octal(va_arg(my_args, unsigned long)));
+			else if (length_modifier == 'h')
+				return (print_short_octal(va_arg(my_args, unsigned int)));
+			else
+				return (print_octal(va_arg(my_args, unsigned int)));
 		case 'x':
 		case 'X':
-			return (print_hexadecimal(va_arg(my_args, unsigned int), specifier));
+			if (length_modifier == 'l')
+				return (print_long_hexadecimal(va_arg(my_args, unsigned long), specifier));
+			else if (length_modifier == 'h')
+				return (print_short_hexadecimal(va_arg(my_args, unsigned int), specifier));
+			else
+				return (print_hexadecimal(va_arg(my_args, unsigned int), specifier));
 		case 'p':
 			return (print_address(va_arg(my_args, void *)));
 		case '%':
@@ -75,6 +95,8 @@ int handle_format_specifier(char specifier, va_list my_args, int *counter)
 				*ptr = *counter;
 			}
 			return (0);
+		case 'S':
+			return (print_custom_string(va_arg(my_args, char*)));
 		case '\0':
 			return (-1);
 		default:
@@ -82,4 +104,24 @@ int handle_format_specifier(char specifier, va_list my_args, int *counter)
 			_putchar(specifier);
 			return (2);
 	}
+}
+
+/**
+ * flush_buffer - Writes the buffer contents to the output and resets the buffer.
+ * @buffer: The buffer containing the characters to be written.
+ * @buf_index: The current index in the buffer.
+ * @counter: The current counter value.
+ */
+void flush_buffer(char *buffer, int *buf_index, int *counter)
+{
+    int i;
+
+    for (i = 0; i < *buf_index; i++)
+    {
+        _putchar(buffer[i]);
+    }
+
+    *counter += *buf_index;
+    *buf_index = 0;
+    memset(buffer, 0, sizeof(buffer));
 }

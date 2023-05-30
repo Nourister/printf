@@ -6,7 +6,7 @@
  *
  * Return: The number of characters printed
  */
-unsigned int print_unsigned(va_list my_args)
+unsigned int print_unsigned(unsigned int num)
 {
 	unsigned int num = va_arg(my_args, unsigned int);
 	unsigned int counter = 0;
@@ -38,7 +38,8 @@ unsigned int print_unsigned(va_list my_args)
  */
 unsigned int print_unsigned_va_list(va_list my_args)
 {
-	return (print_unsigned(my_args));
+	unsigned int n = va_arg(my_args, unsigned int);
+	return (print_unsignedint(num));
 }
 
 /**
@@ -104,6 +105,26 @@ int print_hexadecimal(unsigned int n, char format)
 	}
 
 	return (counter);
+}
+
+/**
+ * flush_buffer - Writes the buffer contents to the output and resets the buffer.
+ * @buffer: The buffer containing the characters to be written.
+ * @buf_index: The current index in the buffer.
+ * @counter: The current counter value.
+ */
+void flush_buffer(char *buffer, int *buf_index, int *counter)
+{
+    int i;
+
+    for (i = 0; i < *buf_index; i++)
+    {
+        _putchar(buffer[i]);
+    }
+
+    *counter += *buf_index;
+    *buf_index = 0;
+    memset(buffer, 0, sizeof(buffer));
 }
 
 /**

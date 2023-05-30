@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <unistd.h>
 
+#define BUFFER_SIZE 1024
 
 typedef struct specifier
 {
@@ -32,16 +33,21 @@ unsigned int print_unsigned(va_list my_args);
 
 unsigned int print_unsigned_va_list(va_list my_args);
 
-int print_octal(unsigned int n);
-
-int print_hexadecimal(unsigned int n, char format);
+unsigned int print_octal(va_list my_args);
 
 int print_address(void *p);
 
 int main(void);
 
-int print_decimal(int num);
-
 int handle_format_specifier(char specifier, va_list my_args, int *counter);
+
+void flush_buffer(char *buffer, int *buf_index, int *counter);
+
+unsigned int print_custom_string(char *str);
+
+unsigned int _putchar_hex(unsigned char c);
+
+unsigned int print_hexadecimal(va_list my_args, char specifier);
+unsigned int print_decimal(int num);
 
 #endif /* MAIN_H */
