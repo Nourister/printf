@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include <stdarg.h>
 #include <string.h>
+#include <unistd.h>
+
 
 /* Array of conversion specifiers and corresponding print functions */
 print_function_t print_functions[] = {
@@ -75,5 +77,5 @@ int _printf(const char *format, ...)
 
     va_end(my_args);
 
-    return (counter);
+    return counter;
 }
