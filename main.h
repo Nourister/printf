@@ -17,7 +17,7 @@ typedef struct print_function
 
 int main ();
 
-int _putchar(char c);
+/*int _putchar(char c);*/
 
 int _printf(const char *format, ...);
 
