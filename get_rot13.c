@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * _rot13 - prints rot13 version
+ * print_rot13 - prints rot13 version
  * @rot: list being passed
  * Return: count of chars
  */
