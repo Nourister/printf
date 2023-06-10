@@ -5,30 +5,30 @@
  * @rot: list being passed
  * Return: count of chars
  */
-int _rot13(va_list rot)
+int print_rot13(va_list rot)
 {
-	int a, count;
-	char *s;
+	int n, counter;
+	char *str;
 
-	a = count = 0;
-	s = va_arg(rot, char *);
+	n = counter = 0;
+	str = va_arg(rot, char *);
 
-	if (s == NULL)
+	if (str == NULL)
 		return (-1);
-	while (s[a] != '\0')
+	while (str[n] != '\0')
 	{
-		if ((s[a] >= 'a' && s[a] <= 'z') ||
-		    (s[a] >= 'A' && s[a] <= 'Z'))
+		if ((str[n] >= 'a' && str[n] <= 'z') ||
+		    (str[n] >= 'A' && str[n] <= 'Z'))
 		{
-			if ((s[a] >= 'n' && s[a] <= 'z') ||
-			    (s[a] >= 'N' && s[a] <= 'Z'))
-				count = count + _putchar(s[a] - 13);
+			if ((str[n] >= 'n' && str[n] <= 'z') ||
+			    (str[n] >= 'N' && str[n] <= 'Z'))
+				counter = counter + _putchar(str[n] - 13);
 			else
-				count = count + _putchar(s[a] + 13);
+				counter = counter + _putchar(str[n] + 13);
 		}
 		else
-			count = count + _putchar(s[a]);
-		a++;
+			counter = counter + _putchar(str[n]);
+		n++;
 	}
-	return (count);
+	return (counter);
 }

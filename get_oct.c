@@ -1,33 +1,33 @@
 #include "main.h"
 
 /**
- * _oct - function to print octal
- * @octo: list being passed
+ * print_oct - function to print octal
+ * @octa: list being passed
  * Return: updated count
  */
-int _oct(va_list octo)
+int print_oct(va_list octa)
 {
-	int count = 0, i;
+	int counter = 0, n;
 	int *arr;
-	unsigned int n = va_arg(octo, unsigned int);
-	unsigned int tmp = n;
+	unsigned int l = va_arg(octa, unsigned int);
+	unsigned int tmp = l;
 
-	while (n / 8 != 0)
+	while (l / 8 != 0)
 	{
-		n /= 8;
-		count++;
+		l /= 8;
+		counter++;
 	}
-	count++;
-	arr = malloc(count * sizeof(int));
-	for (i = 0; i < count; i++)
+	counter++;
+	arr = malloc(counter * sizeof(int));
+	for (n = 0; n < counter; n++)
 	{
-		arr[i] = tmp % 8;
+		arr[n] = tmp % 8;
 		tmp /= 8;
 	}
-	for (i = count - 1; i >= 0; i--)
+	for (n = counter - 1; n >= 0; n--)
 	{
-		_putchar(arr[i] + '0');
+		_putchar(arr[n] + '0');
 	}
 	free(arr);
-	return (count);
+	return (counter);
 }

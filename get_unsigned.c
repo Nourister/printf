@@ -1,24 +1,24 @@
 #include "main.h"
 
 /**
- * _ui - unsigned int print to stdout
- * @unsign: list being passed
+ * print_ui - unsigned int print to stdout
+ * @uni: unsigned list being passed
  * Return: char count
  */
-int _ui(va_list unsign)
+int print_ui(va_list uni)
 {
-	unsigned int n;
+	unsigned int a;
 	int expo = 1;
 	int len = 0;
 
-	n = va_arg(unsign, unsigned int);
+	a = va_arg(uni, unsigned int);
 
-	while (n / expo > 9)
+	while (a / expo > 9)
 		expo *= 10;
 	while (expo != 0)
 	{
-		len = len + _putchar(n / expo + '0');
-		n = n % expo;
+		len = len + _putchar(a / expo + '0');
+		a = a % expo;
 		expo = expo / 10;
 	}
 	return (len);

@@ -1,38 +1,38 @@
 #include "main.h"
 
 /**
- * _bin - function to print binary
+ * print_bin - function to print binary
  * @bin: list being passed
  * Return: updated count return
  */
-int _bin(va_list bin)
+int print_bin(va_list bin)
 {
-	int count = 0, i;
+	int counter = 0, n;
 	int *arr;
-	unsigned int n = va_arg(bin, unsigned int);
-	unsigned int tmp = n;
+	unsigned int l = va_arg(bin, unsigned int);
+	unsigned int tmp = l;
 
-	while (n / 2 != 0)
+	while (l / 2 != 0)
 	{
-		n /= 2;
-		count++;
+		l /= 2;
+		counter++;
 	}
-	count++;
-	arr = malloc(count * sizeof(int));
+	counter++;
+	arr = malloc(counter * sizeof(int));
 	if (arr == NULL)
 	{
 		free(arr);
 		return (0);
 	}
-	for (i = 0; i < count; i++)
+	for (n = 0; n < counter; n++)
 	{
-		arr[i] = tmp % 2;
+		arr[n] = tmp % 2;
 		tmp /= 2;
 	}
-	for (i = count - 1; i >= 0; i--)
+	for (n = counter - 1; n >= 0; n--)
 	{
-		_putchar(arr[i] + '0');
+		_putchar(arr[n] + '0');
 	}
 	free(arr);
-	return (count);
+	return (counter);
 }

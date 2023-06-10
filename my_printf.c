@@ -4,42 +4,42 @@
  * print_op - function to check which specifier to print
  * @format: string being passed
  * @print_arr: array of struct ops
- * @list: list of arguments to print
+ * @my_list: list of arguments to print
  * Return: numb of char to be printed
  */
-int print_op(const char *format, fmt_t *print_arr, va_list list)
+int print_op(const char *format, fmt_t *print_arr, va_list my_list)
 {
-	char a;
-	int count = 0, b = 0, c = 0;
+	char n;
+	int counter = 0, i = 0, l = 0;
 
-	a = format[b];
-	while (a != '\0')
+	n = format[i];
+	while (n != '\0')
 	{
-		if (a == '%')
+		if (n == '%')
 		{
-			c = 0;
-			b++;
-			a = format[b];
-			while (print_arr[c].type != NULL &&
-			       a != *(print_arr[c].type))
-				c++;
-			if (print_arr[c].type != NULL)
-				count = count + print_arr[c].f(list);
+			l = 0;
+			i++;
+			n = format[i];
+			while (print_arr[l].type != NULL &&
+			       n != *(print_arr[l].type))
+				l++;
+			if (print_arr[l].type != NULL)
+				counter = counter + print_arr[l].f(my_list);
 			else
 			{
-				if (a == '\0')
+				if (n == '\0')
 					return (-1);
-				if (a != '%')
-					count += _putchar('%');
-				count += _putchar(a);
+				if (n != '%')
+					counter += _putchar('%');
+				counter += _putchar(n);
 			}
 		}
 		else
-			count += _putchar(a);
-		b++;
-		a = format[b];
+			counter += _putchar(n);
+		i++;
+		n = format[i];
 	}
-	return (count);
+	return (counter);
 }
 
 /**
@@ -49,27 +49,27 @@ int print_op(const char *format, fmt_t *print_arr, va_list list)
  */
 int _printf(const char *format, ...)
 {
-	va_list list;
-	int a = 0;
+	va_list my_list;
+	int counter = 0;
 
 	fmt_t ops[] = {
-		{"c", ch},
-		{"s", str},
-		{"d", _int},
-		{"b", _bin},
-		{"i", _int},
-		{"u", _ui},
-		{"o", _oct},
+		{"c", print_char},
+		{"s", _str},
+		{"d", print_int},
+		{"b", print_bin},
+		{"i", print_int},
+		{"u", print_ui},
+		{"o", print_oct},
 		{"x", _hex_l},
 		{"X", _hex_u},
-		{"R", _rot13},
+		{"R", print_rot13},
 		{NULL, NULL}
 	};
 
 	if (format == NULL)
 		return (-1);
-	va_start(list, format);
-	a = print_op(format, ops, list);
-	va_end(list);
-	return (a);
+	va_start(my_list, format);
+	counter = print_op(format, ops, my_list);
+	va_end(my_list);
+	return (counter);
 }
