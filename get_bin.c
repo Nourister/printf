@@ -1,9 +1,9 @@
 #include "main.h"
 
 /**
- * print_bin - function to print binary
- * @bin: list being passed
- * Return: updated count return
+ * print_bin - function to print binary numbers
+ * @bin: list being passed in the func
+ * Return: updated count
  */
 int print_bin(va_list bin)
 {
