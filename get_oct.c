@@ -1,9 +1,9 @@
 #include "main.h"
 
 /**
- * print_oct - function to print octal
+ * print_oct - function to print octal numbers
  * @octa: list being passed
- * Return: updated count
+ * Return: updated counter
  */
 int print_oct(va_list octa)
 {

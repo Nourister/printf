@@ -31,9 +31,9 @@ int print_hex_str(unsigned int hex, unsigned int n, char alpha)
 }
 
 /**
- * _hex_l - printing lower case hex
- * @hex: argument recieved
- * Return: no of char printed
+ * _hex_l - printing lower case hex numbers
+ * @hex: argument received
+ * Return: number of char printed
  */
 int _hex_l(va_list hex)
 {
@@ -41,9 +41,9 @@ int _hex_l(va_list hex)
 }
 
 /**
- * _hex_u - printing upper case hex
- * @hex: argument recieved
- * Return: no. of char printed
+ * _hex_u - printing upper case hex numbers
+ * @hex: argument received
+ * Return: number of char printed
  */
 int _hex_u(va_list hex)
 {

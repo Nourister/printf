@@ -2,7 +2,7 @@
 
 /**
  * print_op - function to check which specifier to print
- * @format: string being passed
+ * @format: string, first argument
  * @print_arr: array of struct ops
  * @my_list: list of arguments to print
  * Return: numb of char to be printed
@@ -43,10 +43,11 @@ int print_op(const char *format, fmt_t *print_arr, va_list my_list)
 }
 
 /**
- * _printf - prints output according to format
- * @format: string being passed
- * Return: char to be printed
+ * _printf - produces output accourding to format
+ * @format: string, first argument
+ * Return: length of format
  */
+
 int _printf(const char *format, ...)
 {
 	va_list my_list;

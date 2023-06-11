@@ -8,7 +8,7 @@
 /**
  * struct fmt - function to check for formats
  * @type: The format to print
- * @f: The print function to use
+ * @f: The print function to use as apointer
  */
 typedef struct fmt
 {

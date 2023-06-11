@@ -1,9 +1,9 @@
 #include "main.h"
 
 /**
- * print_ui - unsigned int print to stdout
+ * print_ui - unsigned int printed to stdout
  * @uni: unsigned list being passed
- * Return: char count
+ * Return: character count
  */
 int print_ui(va_list uni)
 {

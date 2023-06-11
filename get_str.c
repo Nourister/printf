@@ -2,8 +2,8 @@
 
 /**
  * _str - prints string to stdout
- * @string: list
- * Return: number of char
+ * @string: list to be passed
+ * Return: number of characters
  */
 int _str(va_list string)
 {

@@ -2,8 +2,8 @@
 
 /**
  * print_rot13 - prints rot13 version
- * @rot: list being passed
- * Return: count of chars
+ * @rot: list to  be passed
+ * Return: count of chars to be printed
  */
 int print_rot13(va_list rot)
 {

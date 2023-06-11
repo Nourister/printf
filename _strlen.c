@@ -1,9 +1,9 @@
 #include "main.h"
 
 /**
- * print_strlen - gets string length
- * @str: string
- * Return: length (int)
+ * print_strlen - prints string length
+ * @str: string to be passed
+ * Return: length in int
  */
 
 int print_strlen(char *str)
