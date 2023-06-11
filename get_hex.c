@@ -9,25 +9,25 @@
  */
 int print_hex_str(unsigned int hex, unsigned int n, char alpha)
 {
-	unsigned int a = n % hex;
-	unsigned int b = n / hex;
-	char c;
+	unsigned int k = n % hex;
+	unsigned int i = n / hex;
+	char l;
 
-	if (a > 10)
-		c = (a - 10) + alpha;
+	if (k > 10)
+		l = (k - 10) + alpha;
 	else
-		c = a + '0';
-	if (b == 0)
+		l = k + '0';
+	if (i == 0)
 	{
-		return (_putchar(c));
+		return (_putchar(l));
 	}
-	if (b < hex)
+	if (i < hex)
 	{
-		if (b > 10)
-			return (_putchar(b - 10 + alpha) + _putchar(c));
-		return (_putchar(b + '0') + _putchar(c));
+		if (i > 10)
+			return (_putchar(i - 10 + alpha) + _putchar(l));
+		return (_putchar(i + '0') + _putchar(l));
 	}
-	return (print_hex_str(b, hex, alpha) + _putchar(c));
+	return (print_hex_str(i, hex, alpha) + _putchar(l));
 }
 
 /**
